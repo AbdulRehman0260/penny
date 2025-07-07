@@ -36,4 +36,13 @@ export const useTransactionStore = create((set) => ({
       set({ openIncomeForm: false });
     }
   },
+
+  getExpenseTransactions: async () => {
+    try {
+      const res = await axiosInstance.get("/transaction/get-transactions");
+      return res;
+    } catch (error) {
+      console.log("Error:", error);
+    }
+  },
 }));
