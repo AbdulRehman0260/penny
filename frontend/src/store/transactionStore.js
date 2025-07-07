@@ -3,6 +3,8 @@ import { axiosInstance } from "../lib/axios";
 import toast from "react-hot-toast";
 
 export const useTransactionStore = create((set) => ({
+  transactions: [],
+  income: [],
   showExpenseForm: false,
   showIncomeForm: false,
   openExpenseForm: () => set({ showExpenseForm: true }),
@@ -12,11 +14,12 @@ export const useTransactionStore = create((set) => ({
 
   submitExpenseForm: async (data) => {
     try {
-      const res = await axiosInstance.post(
-        "/transaction/add-transaction",
-        data
-      );
+      await axiosInstance.post("/transaction/add-transaction", data);
       toast.success("Expense added successfully");
+      const res = await axiosInstance.get(
+        "/transaction/get-transactions/monthly"
+      );
+      set({ transactions: res.data });
     } catch (error) {
       toast.error(error.response.data.message);
     } finally {
@@ -25,22 +28,36 @@ export const useTransactionStore = create((set) => ({
   },
   submitIncomeForm: async (data) => {
     try {
-      const res = await axiosInstance.post(
-        "/transaction/add-transaction",
-        data
-      );
+      await axiosInstance.post("/transaction/add-transaction", data);
       toast.success("Income added successfully");
+      const res = await axiosInstance.get(
+        "transaction/get-transactions/income-monthly"
+      );
+      set({ income: res.data });
     } catch (error) {
       toast.error(error.response.data.message);
     } finally {
-      set({ openIncomeForm: false });
+      set({ showIncomeForm: false });
     }
   },
 
-  getExpenseTransactions: async () => {
+  getMonthlyIncomeTransactions: async () => {
     try {
-      const res = await axiosInstance.get("/transaction/get-transactions");
-      return res;
+      const res = await axiosInstance.get(
+        "/transaction/get-transactions/income-monthly"
+      );
+      set({ income: res.data });
+    } catch (error) {
+      console.log("Error:", error);
+    }
+  },
+
+  getMonthlyExpenseTransactions: async () => {
+    try {
+      const res = await axiosInstance.get(
+        "/transaction/get-transactions/monthly"
+      );
+      set({ transactions: res.data });
     } catch (error) {
       console.log("Error:", error);
     }

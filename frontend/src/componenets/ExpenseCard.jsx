@@ -1,19 +1,20 @@
 import React from "react";
 
-const ExpenseCard = ({ title, amount, category, description }) => {
+const ExpenseCard = ({ amount, category, description, type }) => {
+  const amountStyle = {
+    color: type === "income" ? "green" : "red",
+    fontWeight: "bold",
+    textAlign: "right",
+  };
+
   return (
     <div className="expense-card">
-      <div className="expense-header">
-        <h3>{title}</h3>
-        <div className="expense-amount">{amount}</div>
-      </div>
-      <div className="expense-details">
-        <p>
-          <strong>Category:</strong> {category}
-        </p>
-        <p>
-          <strong>Description:</strong> {description}
-        </p>
+      <p className="card-category">
+        <strong>{category}</strong>
+      </p>
+      <p>{description}</p>
+      <div className="expense-amount" style={amountStyle}>
+        £{amount}
       </div>
     </div>
   );

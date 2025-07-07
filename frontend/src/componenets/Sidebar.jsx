@@ -17,27 +17,27 @@ const Sidebar = () => {
     <div className="sidebar-container">
       <div className="goal-btn-container">
         <div className="sidebar-btn" onClick={openGoalForm}>
-          <CirclePlus />
+          <CirclePlus className="circle-btn" />
           <button className="add-goal-btn" onClick={openGoalForm}>
             {" "}
             Goal
           </button>
         </div>
         <div className="sidebar-btn">
-          <Trash />
+          <Trash className="circle-btn" />
           <button className="add-goal-btn"> Goal</button>
         </div>
       </div>
       <div className="money-btn-container">
         <div className="sidebar-btn" onClick={openExpenseForm}>
-          <DiamondMinus />
+          <CirclePlus className="circle-btn" />
           <button className="add-goal-btn" onClick={openExpenseForm}>
             {" "}
             Expense
           </button>
         </div>
         <div className="sidebar-btn" onClick={openIncomeForm}>
-          <DiamondPlus />
+          <CirclePlus className="circle-btn" />
           <button className="add-goal-btn" onClick={openIncomeForm}>
             {" "}
             Income

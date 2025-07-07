@@ -1,6 +1,7 @@
 import React from "react";
 import { useAuthStore } from "../store/useAuthStore";
 import { useNavigate } from "react-router-dom";
+import { CirclePoundSterling } from "lucide-react";
 
 const Navbar = () => {
   const { authUser, logout } = useAuthStore();
@@ -9,6 +10,11 @@ const Navbar = () => {
   if (authUser) {
     return (
       <div className="navbar-container">
+        <div>
+          <CirclePoundSterling className="nav-coin" />
+          <CirclePoundSterling className="nav-coin" />
+          <CirclePoundSterling className="nav-coin" />
+        </div>
         <button
           className="navbar-btn"
           type="button"

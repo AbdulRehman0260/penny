@@ -87,6 +87,42 @@ export const getTransactions = async (req, res) => {
   }
 };
 
+export const getMonthlyTransactions = async (req, res) => {
+  try {
+    const loggedInUserId = req.user._id;
+
+    const userTransactions = await Transaction.find({
+      userId: { $eq: loggedInUserId },
+      recurring: true,
+      frequency: "Monthly",
+      type: "Expense",
+    }).sort({ amount: -1 }); // largest first
+
+    res.status(200).json(userTransactions);
+  } catch (error) {
+    console.error("Error fetching transactions:", error);
+    res.status(500).json({ message: "Could not fetch transactions" });
+  }
+};
+
+export const getMonthlyIncomeTransactions = async (req, res) => {
+  try {
+    const loggedInUserId = req.user._id;
+
+    const userTransactions = await Transaction.find({
+      userId: { $eq: loggedInUserId },
+      recurring: true,
+      frequency: "Monthly",
+      type: "Income",
+    }).sort({ amount: -1 }); // largest first
+
+    res.status(200).json(userTransactions);
+  } catch (error) {
+    console.error("Error fetching transactions:", error);
+    res.status(500).json({ message: "Could not fetch transactions" });
+  }
+};
+
 export const deleteTransaction = async (req, res) => {
   try {
     const transactionId = req.params.id;
