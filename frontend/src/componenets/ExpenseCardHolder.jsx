@@ -8,7 +8,6 @@ const ExpenseCardHolder = ({ data }) => {
   return (
     <div className="expense-card-holder">
       <h3>Monthly Expenses</h3>
-      <br />
       <div className="expense-card-list">
         {data.map((expense) => (
           <ExpenseCard
@@ -18,6 +17,7 @@ const ExpenseCardHolder = ({ data }) => {
             category={expense.category}
             description={expense.description}
             type="expense"
+            id={expense._id}
           />
         ))}
       </div>

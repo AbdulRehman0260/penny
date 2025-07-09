@@ -62,4 +62,27 @@ export const useTransactionStore = create((set) => ({
       console.log("Error:", error);
     }
   },
+
+  onDelete: async (id) => {
+    try {
+      const res = await axiosInstance.delete(
+        `/transaction/delete-transaction/${id}`
+      );
+      const answer = window.confirm("Are you sure you want to delete this?");
+      if (answer) {
+        toast.success("Transaction deleted successfully");
+        const updated = await axiosInstance.get(
+          "/transaction/get-transactions/monthly"
+        );
+        const updatedi = await axiosInstance.get(
+          "/transaction/get-transactions/income-monthly"
+        );
+        set({ transactions: updated.data });
+        set({ income: updatedi.data });
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Failed to delete transaction");
+    }
+  },
 }));

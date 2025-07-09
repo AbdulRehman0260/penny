@@ -81,7 +81,7 @@ body {
 .dash-page-container {
   display: grid;
   min-height: 100vh;
-  grid-template-columns: 1fr 3fr 3fr 3fr 1fr;
+  grid-template-columns: 150px 2fr 3fr 1fr;
   gap: 10px;
 }
 
@@ -120,12 +120,20 @@ body {
 .sidebar-container {
   height: 100vh;
   border-color: #d8d7e0;
-  box-shadow: 0px 1px 4px rgba(1, 1, 1, 0.2);
-}
+  background-color: #3f3d56;
+  display: flex;
+  flex-direction: column;
+  width: 150px;
+  color: white;
+  padding: 0;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+  }
 
 .circle-btn {
-  stroke-width: 1px;
+  stroke-width: 2px;
   size: 16px;
+  color:#fff;
 }
 
 .goal-btn-container {
@@ -134,19 +142,8 @@ body {
   flex-direction: column;
   justify-content: space-evenly;
   border-color: hsl(247, 39%, 95%);
-  height: 15vh;
-  box-shadow: 0px 1px 2px rgba(1, 1, 1, 0.2);
 }
 
-.money-btn-container {
-  width: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  border-color: hsl(247, 39%, 95%);
-  height: 15vh;
-  box-shadow: 0px 1px 2px rgba(1, 1, 1, 0.2);
-}
 
 .add-goal-form-input {
   display: flex;
@@ -162,13 +159,21 @@ body {
   transition: background-color 0.5s ease;
   padding-top: 2px;
   background-color: transparent;
-  color: black;
+  color: #fff;
   font-weight: 500;
   font-size: 12px;
+  align-content: start;
+}
+h3{
+  color:#3f3d56;
 }
 
 .add-goal-btn:hover {
   cursor: pointer;
+}
+
+text-btn {
+  display: flex;
 }
 
 .form-btn-container {
@@ -177,31 +182,31 @@ body {
 
 .sidebar-btn {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
-  size: 1px;
+  height: 28px;
+  padding: 20px;
 }
 
 .sidebar-btn:hover {
   cursor: pointer;
+  background-color:#d8d7e0;
 }
 
 /* Card Holder CSS */
 
 .expense-card-holder {
-  width: 400px;
-  max-height: 60vh; /* Limit max height */
-  overflow-y: auto; /* Only scroll when needed */
+  width: 500px;
+  max-height: 60vh; 
+  overflow-y: auto; 
   margin-top: 1%;
   border: solid 1px #ccc;
   border-radius: 6px;
   padding: 10px 20px;
   background-color: #fff;
   align-self: flex-start;
-
-  /* 🔥 Critical: don't force it to expand */
   height: auto;
-  display: inline-block; /* or block if needed */
+  display: inline-block; 
 }
 
 .expense-card-list {
@@ -211,26 +216,30 @@ body {
 }
 
 .expense-card {
-  background: white;
-  border: 0.5px solid #ddd;
-  border-left: none;
-  border-right: none;
-  font-size: 0.8rem;
-  padding: 5px;
   display: flex;
-  justify-content: space-between;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
 }
 
 .card-category {
-  margin: 0;
-  color: #333;
-  font-weight: 600;
+  flex: 1;
+    font-weight: 600;
+}
+
+.expense-description {
+  flex: 2;
+    text-align: center;
+    color: #666;
 }
 
 .expense-amount {
-  font-weight: bold;
-  color: #e74c3c;
-  font-size: 0.8rem;
+  flex: 1;
+    text-align: right;
+    color: #e74c3c;
+    font-weight: 600;
+    margin-right: 30px;
 }
 
 .expense-details p {
@@ -241,6 +250,29 @@ body {
 
 .expense-details strong {
   color: #333;
+}
+
+.delete-btn {
+  background: none;
+    border: none;
+    font-size: 0px;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.card-btn{
+  stroke-width: 0.5px ;
+  size: 24px;
+  padding: 5px;
+}
+
+.card-btn:hover {
+  stroke-width: 2px;
+  size: 24px;
+  padding: 0px;
+  cursor: pointer;
 }
 
 .total-row {

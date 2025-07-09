@@ -15,34 +15,23 @@ const Sidebar = () => {
 
   return (
     <div className="sidebar-container">
-      <div className="goal-btn-container">
-        <div className="sidebar-btn" onClick={openGoalForm}>
-          <CirclePlus className="circle-btn" />
-          <button className="add-goal-btn" onClick={openGoalForm}>
-            {" "}
-            Goal
-          </button>
-        </div>
-        <div className="sidebar-btn">
-          <Trash className="circle-btn" />
-          <button className="add-goal-btn"> Goal</button>
-        </div>
+      <div className="sidebar-btn" onClick={openGoalForm}>
+        <button className="add-goal-btn" onClick={openGoalForm}>
+          {" "}
+          Add Goal
+        </button>
       </div>
-      <div className="money-btn-container">
-        <div className="sidebar-btn" onClick={openExpenseForm}>
-          <CirclePlus className="circle-btn" />
-          <button className="add-goal-btn" onClick={openExpenseForm}>
-            {" "}
-            Expense
-          </button>
-        </div>
-        <div className="sidebar-btn" onClick={openIncomeForm}>
-          <CirclePlus className="circle-btn" />
-          <button className="add-goal-btn" onClick={openIncomeForm}>
-            {" "}
-            Income
-          </button>
-        </div>
+      <div className="sidebar-btn" onClick={openExpenseForm}>
+        <button className="add-goal-btn" onClick={openExpenseForm}>
+          {" "}
+          Add Expense
+        </button>
+      </div>
+      <div className="sidebar-btn" onClick={openIncomeForm}>
+        <button className="add-goal-btn" onClick={openIncomeForm}>
+          {" "}
+          Add Income
+        </button>
       </div>
     </div>
   );

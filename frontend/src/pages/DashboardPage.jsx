@@ -18,6 +18,7 @@ const DashboardPage = () => {
     getMonthlyIncomeTransactions,
     transactions,
     income,
+    onDelete,
   } = useTransactionStore();
 
   useEffect(() => {

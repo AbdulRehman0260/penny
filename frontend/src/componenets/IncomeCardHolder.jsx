@@ -8,7 +8,6 @@ const IncomeCardHolder = ({ data }) => {
   return (
     <div className="expense-card-holder">
       <h3>Monthly Income</h3>
-      <br />
       <div className="income-card-list">
         {data.map((income) => (
           <ExpenseCard
@@ -18,6 +17,7 @@ const IncomeCardHolder = ({ data }) => {
             category={income.category}
             description={income.description}
             type="income"
+            id={income._id}
           />
         ))}
       </div>
