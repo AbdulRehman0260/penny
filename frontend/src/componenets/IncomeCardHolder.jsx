@@ -1,15 +1,17 @@
 import React from "react";
 import ExpenseCard from "./ExpenseCard";
+import { useTransactionStore } from "../store/transactionStore";
 
-const IncomeCardHolder = ({ data }) => {
-  const totalAmount = data.reduce((sum, item) => sum + item.amount, 0);
+const IncomeCardHolder = () => {
+  const { income } = useTransactionStore();
+  const totalAmount = income.reduce((sum, item) => sum + item.amount, 0);
   console.log(totalAmount);
 
   return (
     <div className="expense-card-holder">
       <h3>Monthly Income</h3>
       <div className="income-card-list">
-        {data.map((income) => (
+        {income.map((income) => (
           <ExpenseCard
             key={income._id}
             title={income.title}
@@ -17,6 +19,8 @@ const IncomeCardHolder = ({ data }) => {
             category={income.category}
             description={income.description}
             type="income"
+            recurring={income.recurring}
+            frequency={income.frequency}
             id={income._id}
           />
         ))}

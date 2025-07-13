@@ -135,7 +135,8 @@ export const deleteTransaction = async (req, res) => {
 
 export const updateTransaction = async (req, res) => {
   const { id } = req.params;
-  const { category, type, amount, description, recurring } = req.body;
+  const { category, type, amount, description, recurring, frequency } =
+    req.body;
 
   if (!mongoose.isValidObjectId(id)) {
     return res.status(400).json({ error: "Invalid transaction id" });
@@ -146,46 +147,17 @@ export const updateTransaction = async (req, res) => {
   if (type !== undefined) updateFields.type = type;
   if (amount !== undefined) updateFields.amount = amount;
   if (description !== undefined) updateFields.description = description;
+  if (recurring !== undefined) updateFields.recurring = recurring;
 
-  // Optional: nested recurring logic
-  if (recurring !== undefined) {
-    if (typeof recurring !== "object" || recurring === null) {
-      return res
-        .status(400)
-        .json({ error: "Recurring must be an object if provided" });
+  if (recurring === "Yes") {
+    if (frequency !== undefined) updateFields.frequency = frequency;
+    const validFrequencies = ["daily", "weekly", "monthly", "yearly"];
+    if (!validFrequencies.includes(frequency.toLowerCase())) {
+      return res.status(400).json({
+        error: `Frequency must be one of: ${validFrequencies.join(", ")}`,
+      });
     }
-
-    const { isRecurring, frequency } = recurring;
-    const updateRecurring = {};
-
-    if (isRecurring !== undefined) {
-      if (typeof isRecurring !== "boolean") {
-        return res.status(400).json({ error: "isRecurring must be a boolean" });
-      }
-      updateRecurring.isRecurring = isRecurring;
-
-      if (isRecurring) {
-        if (!frequency || typeof frequency !== "string") {
-          return res
-            .status(400)
-            .json({ error: "Frequency is required when isRecurring is true" });
-        }
-
-        const validFrequencies = ["daily", "weekly", "monthly", "yearly"];
-        if (!validFrequencies.includes(frequency.toLowerCase())) {
-          return res.status(400).json({
-            error: `Frequency must be one of: ${validFrequencies.join(", ")}`,
-          });
-        }
-
-        updateRecurring.frequency = frequency.toLowerCase();
-      }
-    }
-
-    // If at least one subfield is being updated, apply it
-    if (Object.keys(updateRecurring).length > 0) {
-      updateFields.recurring = updateRecurring;
-    }
+    updateFields.frequency = frequency;
   }
 
   try {

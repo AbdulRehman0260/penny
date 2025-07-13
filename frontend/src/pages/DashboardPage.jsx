@@ -36,7 +36,7 @@ const DashboardPage = () => {
       {showExpenseForm ? <AddTransactionCard /> : ""}
       {showIncomeForm ? <AddIncomeCard /> : ""}
       <div className="monthly-picture">
-        <ExpenseCardHolder data={transactions} />
+        <ExpenseCardHolder />
         <IncomeCardHolder data={income} />
       </div>
     </div>

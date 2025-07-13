@@ -1,82 +1,107 @@
-import React, { useState } from "react";
-import { useTransactionStore } from "../store/transactionStore.js";
+import React, { useEffect, useState } from "react";
+import { useTransactionStore } from "../store/transactionStore";
 
 const AddIncomeCard = () => {
-  const { closeIncomeForm, submitIncomeForm } = useTransactionStore();
+  const {
+    onEdit,
+    isEditMode,
+    editData,
+    clearEditTransaction,
+    closeIncomeForm,
+    submitIncomeForm,
+  } = useTransactionStore();
 
   const [transactionFormData, setTransactionFormData] = useState({
     amount: 0,
     type: "Income",
     category: "",
     description: "",
-    date: Date.now,
-    recurring: "false",
-    frequency: "None",
+    date: Date.now(),
+    recurring: "true",
+    frequency: "Monthly",
   });
 
-  const handleSubmit = (e) => {
+  // Pre-fill form in edit mode
+  useEffect(() => {
+    if (isEditMode && editData) {
+      setTransactionFormData({
+        amount: editData.amount,
+        type: editData.type || "Income",
+        category: editData.category || "",
+        description: editData.description || "",
+        date: editData.date || Date.now(),
+        recurring: editData.recurring?.toString() || "false",
+        frequency: editData.frequency || "None",
+      });
+    }
+  }, [isEditMode, editData]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    submitIncomeForm(transactionFormData); ///look over
+
+    if (isEditMode) {
+      await onEdit(editData.id, transactionFormData);
+      clearEditTransaction();
+    } else {
+      await submitIncomeForm(transactionFormData);
+    }
+
+    closeIncomeForm();
   };
 
   return (
     <div className="overlay">
       <div className="pop-card">
-        <h2>Add Income</h2>
-        <br />
+        <h2>{isEditMode ? "Edit Income" : "Add Income"}</h2>
         <form onSubmit={handleSubmit} className="add-goal-form-container">
           <div className="add-goal-form-input">
-            <label htmlFor="">Category</label>
+            <label>Category</label>
             <input
               type="text"
-              placeholder="Enter you category title here"
               value={transactionFormData.category}
               onChange={(e) =>
-                setTransactionFormData({
-                  ...transactionFormData,
+                setTransactionFormData((prev) => ({
+                  ...prev,
                   category: e.target.value,
-                })
+                }))
               }
             />
           </div>
           <div className="add-goal-form-input">
-            <label htmlFor="">Description</label>
+            <label>Description</label>
             <textarea
               rows={4}
-              placeholder="..."
               value={transactionFormData.description}
               onChange={(e) =>
-                setTransactionFormData({
-                  ...transactionFormData,
+                setTransactionFormData((prev) => ({
+                  ...prev,
                   description: e.target.value,
-                })
+                }))
               }
             />
           </div>
           <div className="add-goal-form-input">
-            <label htmlFor="">Amount</label>
+            <label>Amount</label>
             <input
               type="number"
-              placeholder=""
               value={transactionFormData.amount}
               onChange={(e) =>
-                setTransactionFormData({
-                  ...transactionFormData,
-                  amount: e.target.value,
-                })
+                setTransactionFormData((prev) => ({
+                  ...prev,
+                  amount: Number(e.target.value),
+                }))
               }
             />
           </div>
           <div className="add-goal-form-input">
-            <label htmlFor="">Recurring</label>
+            <label>Recurring</label>
             <select
-              placeholder=""
               value={transactionFormData.recurring}
               onChange={(e) =>
-                setTransactionFormData({
-                  ...transactionFormData,
+                setTransactionFormData((prev) => ({
+                  ...prev,
                   recurring: e.target.value,
-                })
+                }))
               }
             >
               <option value="true">Yes</option>
@@ -84,17 +109,16 @@ const AddIncomeCard = () => {
             </select>
           </div>
 
-          {transactionFormData.recurring == "true" ? (
+          {transactionFormData.recurring === "true" && (
             <div className="add-goal-form-input">
-              <label htmlFor="">Frequency</label>
+              <label>Frequency</label>
               <select
-                placeholder=""
                 value={transactionFormData.frequency}
                 onChange={(e) =>
-                  setTransactionFormData({
-                    ...transactionFormData,
+                  setTransactionFormData((prev) => ({
+                    ...prev,
                     frequency: e.target.value,
-                  })
+                  }))
                 }
               >
                 <option value="Daily">Daily</option>
@@ -102,22 +126,21 @@ const AddIncomeCard = () => {
                 <option value="Yearly">Yearly</option>
               </select>
             </div>
-          ) : (
-            ""
           )}
 
           <div className="form-btn-container">
             <button
               type="button"
               className="form-create-btn"
-              onClick={closeIncomeForm}
+              onClick={() => {
+                clearEditTransaction();
+                closeIncomeForm();
+              }}
             >
-              {" "}
               Cancel
             </button>
             <button type="submit" className="form-create-btn">
-              {" "}
-              Submit
+              {isEditMode ? "Update" : "Submit"}
             </button>
           </div>
         </form>
@@ -125,4 +148,5 @@ const AddIncomeCard = () => {
     </div>
   );
 };
+
 export default AddIncomeCard;
