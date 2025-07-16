@@ -8,6 +8,7 @@ import { useTransactionStore } from "../store/transactionStore.js";
 import ExpenseCardHolder from "../componenets/ExpenseCardHolder";
 import IncomeCardHolder from "../componenets/IncomeCardHolder";
 import { useState, useEffect } from "react";
+import LeftoverCard from "../componenets/LeftoverCard.jsx";
 
 const DashboardPage = () => {
   const { showGoalForm } = useGoalStore();
@@ -38,6 +39,7 @@ const DashboardPage = () => {
       <div className="monthly-picture">
         <ExpenseCardHolder />
         <IncomeCardHolder data={income} />
+        <LeftoverCard />
       </div>
     </div>
   );
