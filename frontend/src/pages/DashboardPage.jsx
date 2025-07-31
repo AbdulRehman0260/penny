@@ -9,6 +9,8 @@ import ExpenseCardHolder from "../componenets/ExpenseCardHolder";
 import IncomeCardHolder from "../componenets/IncomeCardHolder";
 import { useState, useEffect } from "react";
 import LeftoverCard from "../componenets/LeftoverCard.jsx";
+import Message from "../componenets/Message.jsx";
+import Header from "../componenets/Header.jsx";
 
 const DashboardPage = () => {
   const { showGoalForm } = useGoalStore();
@@ -37,10 +39,12 @@ const DashboardPage = () => {
       {showExpenseForm ? <AddTransactionCard /> : ""}
       {showIncomeForm ? <AddIncomeCard /> : ""}
       <div className="monthly-picture">
+        <Header />
         <ExpenseCardHolder />
         <IncomeCardHolder data={income} />
         <LeftoverCard />
       </div>
+      <Message />
     </div>
   );
 };
