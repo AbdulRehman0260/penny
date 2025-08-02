@@ -33,18 +33,20 @@ const DashboardPage = () => {
   }, []);
 
   return (
-    <div className="dash-page-container">
-      <Sidebar />
-      {showGoalForm ? <AddGoalCard /> : ""}
-      {showExpenseForm ? <AddTransactionCard /> : ""}
-      {showIncomeForm ? <AddIncomeCard /> : ""}
-      <div className="monthly-picture">
-        <Header />
-        <ExpenseCardHolder />
-        <IncomeCardHolder data={income} />
-        <LeftoverCard />
+    <div className="full-height-wrapper">
+      <div className="dash-page-container">
+        <Sidebar />
+        {showGoalForm ? <AddGoalCard /> : ""}
+        {showExpenseForm ? <AddTransactionCard /> : ""}
+        {showIncomeForm ? <AddIncomeCard /> : ""}
+        <div className="monthly-picture">
+          <Header />
+          <ExpenseCardHolder />
+          <IncomeCardHolder data={income} />
+          <LeftoverCard />
+        </div>
+        <Message />
       </div>
-      <Message />
     </div>
   );
 };

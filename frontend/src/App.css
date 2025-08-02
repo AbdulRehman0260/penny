@@ -10,6 +10,10 @@ html,
 body {
   height: 100%;
 }
+.full-height-wrapper {
+  display: flex;
+  height: 100vh;
+}
 
 /* goal card css */
 
@@ -80,12 +84,10 @@ body {
 
 .dash-page-container {
   display: grid;
-  min-height: 100vh;
   grid-template-columns: 150px 2fr 3fr;
-  /* Sidebar | Expense List | Center Message */
   gap: 10px;
-  align-items: center;
-  /* Vertical centering */
+  align-items: start;
+  min-height: 100vh;
 }
 
 .center-message-box {
@@ -147,22 +149,20 @@ body {
 /* SideBar CSS */
 
 .sidebar-container {
-  height: 100vh;
-  border-color: #d8d7e0;
+  align-self: stretch;
   background-color: #3f3d56;
   display: flex;
   flex-direction: column;
   width: 150px;
   color: white;
-  padding: 0;
-    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-    overflow-y: auto;
-  }
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+}
 
 .circle-btn {
   stroke-width: 2px;
   size: 16px;
-  color:#fff;
+  color: #fff;
 }
 
 .goal-btn-container {
@@ -172,7 +172,6 @@ body {
   justify-content: space-evenly;
   border-color: hsl(247, 39%, 95%);
 }
-
 
 .add-goal-form-input {
   display: flex;
@@ -193,8 +192,8 @@ body {
   font-size: 12px;
   align-content: start;
 }
-h3{
-  color:#3f3d56;
+h3 {
+  color: #3f3d56;
 }
 
 .add-goal-btn:hover {
@@ -219,9 +218,8 @@ text-btn {
 
 .sidebar-btn:hover {
   cursor: pointer;
-  background-color:#d8d7e0;
+  background-color: #d8d7e0;
 }
-
 
 .monthly-picture {
   display: flex;
@@ -255,29 +253,29 @@ text-btn {
 
 .expense-card {
   display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px 0;
-    border-bottom: 1px solid #eee;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
 }
 
 .card-category {
   flex: 1;
-    font-weight: 600;
+  font-weight: 600;
 }
 
 .expense-description {
   flex: 2;
-    text-align: center;
-    color: #666;
+  text-align: center;
+  color: #666;
 }
 
 .expense-amount {
   flex: 1;
-    text-align: right;
-    color: #e74c3c;
-    font-weight: 600;
-    margin-right: 30px;
+  text-align: right;
+  color: #e74c3c;
+  font-weight: 600;
+  margin-right: 30px;
 }
 
 .expense-details p {
@@ -292,16 +290,16 @@ text-btn {
 
 .delete-btn {
   background: none;
-    border: none;
-    font-size: 0px;
-    cursor: pointer;
-    padding: 4px 8px;
-    border-radius: 4px;
-    transition: background-color 0.2s;
+  border: none;
+  font-size: 0px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
 }
 
-.card-btn{
-  stroke-width: 0.5px ;
+.card-btn {
+  stroke-width: 0.5px;
   size: 24px;
   padding: 5px;
 }
@@ -352,7 +350,6 @@ text-btn {
   text-align: center;
 }
 
-
 .sgn-heading-account {
   color: #3f3d56;
   font-size: 40px;
@@ -364,7 +361,6 @@ text-btn {
   height: 80px;
   opacity: 70%;
   color: #191825;
-  
 }
 
 .sgn-coin {
